@@ -5,4 +5,6 @@ public interface Transportierbar {
 
     public abstract boolean zerbrechlich();
 
+
 }
+

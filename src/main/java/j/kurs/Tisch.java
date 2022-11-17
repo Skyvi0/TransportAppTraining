@@ -1,8 +1,8 @@
 package j.kurs;
 
 public class Tisch implements Transportierbar {
-    private float gewicht;
-    private boolean zerbrechlich;
+    private final float gewicht;
+    private final boolean zerbrechlich;
 
     public Tisch(float gewicht, boolean zerbrechlich) {
         this.gewicht = gewicht;
