@@ -19,4 +19,10 @@ public class Tisch implements Transportierbar {
         return zerbrechlich;
     }
 
+    // include countAdequateItems() in the interface
+    @Override
+    public int countAdequateItems() {
+        return 0;
+    }
+
 }

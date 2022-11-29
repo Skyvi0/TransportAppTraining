@@ -1,4 +1,5 @@
 package j.kurs;
+
 public class Inventory {
     // array of Transportierbar objects (Tisch, Stuhl, etc.)
     private final Transportierbar[] inventar;
@@ -37,5 +38,20 @@ public class Inventory {
             total += inventar[i].gewicht();
         }
         return total;
+    }
+
+    public Transportierbar[] getItems() {
+        return inventar;
+    }
+
+    //count the adequate items in the inventory
+    public int countAdequateItems() {
+        int countAdequateItems = 0;
+        for (int i = 0; i < count; i++) {
+            if (!inventar[i].zerbrechlich()) {
+                countAdequateItems++;
+            }
+        }
+        return countAdequateItems;
     }
 }
