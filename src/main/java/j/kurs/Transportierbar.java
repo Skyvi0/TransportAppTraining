@@ -5,6 +5,8 @@ public interface Transportierbar {
 
     public abstract boolean zerbrechlich();
 
+    // include countAdequateItems() in the interface
+    public abstract int countAdequateItems();
 
 }
 
