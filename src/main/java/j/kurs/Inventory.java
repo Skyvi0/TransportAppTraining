@@ -44,7 +44,8 @@ public class Inventory {
         return inventar;
     }
 
-    //count the adequate items in the inventory
+    //count the adequate items 
+
     public int countAdequateItems() {
         int countAdequateItems = 0;
         for (int i = 0; i < count; i++) {
