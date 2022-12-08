@@ -44,17 +44,19 @@ public class Employee {
 
     // create 5 rolles with different access levels
     public boolean hasAccessTo(int securityId) {
-        if (securityId == 1) {
-            return true;
-        } else if (securityId == 2) {
-            return true;
-        } else if (securityId == 3) {
-            return true;
-        } else if (securityId == 4) {
-            return true;
-        } else if (securityId == 5) {
-            return true;
-        } else {
+        //do it with switch case instead if else
+         switch (securityId) {
+        case 1:
+         return true;
+        case 2:
+         return true;
+        case 3:
+         return true;
+        case 4:
+         return true;
+        case 5:
+         return true;
+        default:
             return false;
         }
     }

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -13,6 +16,8 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema.Builder;
 public class App {
 
     public static void main(String[] args) {
+        //Logger
+        Logger logger = LoggerFactory.getLogger(App.class);
         // create a new inventory with a maximum of 10 items
         Inventory inventory = new Inventory(10);
         Tisch tisch = new Tisch(10, true);
@@ -25,48 +30,55 @@ public class App {
 
         // get the total weight of the inventory
         Transportierbar glasTisch = new Tisch(30, true);
-        System.out.println("Das Gewicht des Tisches ist: " + glasTisch.gewicht() + "kg" + " und zerbrechlich: "
+        logger.info("Das Gewicht des Tisches ist: " + glasTisch.gewicht() + "kg" + " und zerbrechlich: "
                 + glasTisch.zerbrechlich());
-        System.out.println("Total weight: " + inventory.totalWeight());
+        logger.info("Total weight: " + inventory.totalWeight());
 
         // count the inventory items and save them to a json file in the src folder change the myWriter.write() to an array
-    
+
         try {
             FileWriter myWriter = new FileWriter(
                     "C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.json");
             myWriter.write("Anzahl der Inventaritems: " + inventory.countAdequateItems());
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            logger.info("Successfully wrote to the file.");
+        }
+        // add logger
+        catch (IOException e) {
+            logger.error("Failed to write JSON file.");
         }
 
-        // read the json file in src folder and write the content to a csv file in the src folder use jackson to read the json
-        // file and write the content to a csv file
-        // catch hinzufügen
-        
         try {
             JsonNode jsonTree = new ObjectMapper().readTree(
                     new File("C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.json"));
-                    Builder csvSchemaBuilder = CsvSchema.builder();
-                    JsonNode firstObject = jsonTree.elements().next();
-                    firstObject.fieldNames().forEachRemaining(fieldName -> {csvSchemaBuilder.addColumn(fieldName);} );
-                    CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
-                CsvMapper csvMapper = new CsvMapper();
-        try {
-            csvMapper.writerFor(JsonNode.class)
-                    .with(csvSchema)
-                    .writeValue(
-                            new File(
-                                    "C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.csv"), jsonTree);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+            Builder csvSchemaBuilder = CsvSchema.builder();
+            JsonNode firstObject = jsonTree.elements().next();
+            firstObject.fieldNames().forEachRemaining(fieldName -> {
+                csvSchemaBuilder.addColumn(fieldName);
+            });
+            CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
+            CsvMapper csvMapper = new CsvMapper();
+            try {
+                csvMapper.writerFor(JsonNode.class)
+                        .with(csvSchema)
+                        .writeValue(
+                                new File(
+                                        "C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.csv"),
+                                jsonTree);
+            }
+            //add logger
+            catch (IOException e) {
+                logger.error("Failed to write CSV file.");
+            }
+
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to read JSON file.");
         }
+    }
+    
+    // add employee to the company and give them a unique security id the id goes from 1-5 and is used to check if they have access to that area
+    public static void addEmployee(Company company, Employee employee, int id) {
+        company.addEmployee(employee, id);
     }
 
     // add an item to the inventory

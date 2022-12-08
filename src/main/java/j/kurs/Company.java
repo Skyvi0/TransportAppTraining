@@ -6,6 +6,9 @@ public class Company {
     public void add(Employee employee) {
     }
 
+    public void addEmployee(Employee employee, int id) {
+    }
+
 
 
 }
