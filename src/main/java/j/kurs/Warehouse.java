@@ -83,4 +83,8 @@ public class Warehouse {
             }
         }
     }
+
+    public void add(Inventory inventory) {
+    }
+
 }
