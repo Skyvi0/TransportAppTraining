@@ -55,4 +55,17 @@ public class Inventory {
         }
         return countAdequateItems;
     }
+
+    // check if the inventory is zerbrechlich if so wrap it in some bubble wrap and put it in a secure box
+    public boolean zerbrechlich() {
+        for (int i = 0; i < count; i++) {
+            if (inventar[i].zerbrechlich()) {
+                return true;
+                
+            }
+        }
+        return false;
+    }
+    public void add(BubbleWrap bubbleWrap) {
+    }
 }

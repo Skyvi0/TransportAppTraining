@@ -46,10 +46,16 @@
   <version>20090211</version>
 </dependency>
 
-<dependency> 
+<dependency>
   <groupId>org.slf4j</groupId>
-  <artifactId>slf4j-api</artifactId>
+  <artifactId>slf4j-simple</artifactId>
   <version>2.0.5</version>
+</dependency>
+
+<dependency>
+  <groupId>com.oracle.database.jdbc</groupId>
+  <artifactId>ojdbc8</artifactId>
+  <version>21.3.0.0</version>
 </dependency>
 
   </dependencies>
@@ -58,6 +64,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <java.version>11</java.version>
+    <slf4jVersion>2.0.5</slf4jVersion>
+
 </properties>
 
 
