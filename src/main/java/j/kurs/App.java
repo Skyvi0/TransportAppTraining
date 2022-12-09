@@ -1,27 +1,30 @@
 package j.kurs;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class App {
+
+    private static Transportierbar tisch;
+    private static Transportierbar stuhl;
 
     public static void main(String[] args) {
         //Logger
         Logger logger = LoggerFactory.getLogger(App.class);
         // create a new inventory with a maximum of 10 items
         Inventory inventory = new Inventory(10);
-        Tisch tisch = new Tisch(10, true);
         inventory.add(tisch);
         inventory.add(new Tisch(20, false));
         inventory.add(new Tisch(30, true));
+        inventory.add(new Stuhl(10, false));
+        inventory.add(new Stuhl(15, true));
+        inventory.add(new Stuhl(20, false));
+        inventory.add(new Stuhl(25, true));
 
         // remove item from the inventory
         inventory.remove(tisch);
+        inventory.remove(stuhl);
 
         // get the total weight of the inventory
         Transportierbar glasTisch = new Tisch(30, true);
@@ -30,21 +33,23 @@ public class App {
         logger.info("Total weight: " + inventory.totalWeight());
 
        
-        // impliment a connection to the postgres database
+        // impliment a connection to the oracle database
         try {
-        Connection connection = DriverManager.getConnection(
-        "jdbc:postgresql://localhost:5432/TransportApp",
-        "postgres",
-        "secret"
-        );
-        java.sql.Statement statement = connection.createStatement();
-         ResultSet resultSet = statement.executeQuery("SELECT * FROM Inventar");
-        while (resultSet.next()) {
-        System.out.println(resultSet.getString("name"));
-         }
-        } catch (SQLException e) {
-            logger.error("SQL DB ERROR", e);
-         }
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {
+            logger.error("Oracle JDBC Driver not found", e);
+        }
+        logger.info("Oracle JDBC Driver registered");
+        
+
+        // check if the inventory is zerbrechlich if so wrap it in some bubble wrap
+        if (inventory.zerbrechlich()) {
+            BubbleWrap bubbleWrap = new BubbleWrap();
+            for (int i = 0; i < inventory.countAdequateItems(); i++) {
+                bubbleWrap.wrap(inventory.getItems()[i]);
+            }
+            logger.info("fragile items wrapped in bubble wrap");
+        }
 
         // create a new employee
         Employee employee = new Employee("John", "Doe", 1, "Employee");
@@ -69,66 +74,6 @@ public class App {
         transportCrew.transport(inventory);
         logger.info("Inventory transported to the warehouse");
 
-        // count the inventory items and save them to a json file in the src folder
-        /*try {
-            FileWriter myWriter = new FileWriter(
-                    "C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.json");
-            myWriter.write("Anzahl der Inventaritems: " + inventory.countAdequateItems());
-            myWriter.close();
-            logger.info("Successfully wrote to the file.");
-        }
-        // add logger
-        catch (IOException e) {
-            logger.error("Failed to write JSON file.");
-        }
-
-        try {
-            JsonNode jsonTree = new ObjectMapper().readTree(
-                    new File("C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.json"));
-            Builder csvSchemaBuilder = CsvSchema.builder();
-            JsonNode firstObject = jsonTree
-
-        // count the inventory items and save them to a json file in the src folder change the myWriter.write() to an array
-
-        /*try {
-            FileWriter myWriter = new FileWriter(
-                    "C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.json");
-            myWriter.write("Anzahl der Inventaritems: " + inventory.countAdequateItems());
-            myWriter.close();
-            logger.info("Successfully wrote to the file.");
-        }
-        // add logger
-        catch (IOException e) {
-            logger.error("Failed to write JSON file.");
-        }
-        
-        try {
-            JsonNode jsonTree = new ObjectMapper().readTree(
-                    new File("C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.json"));
-            Builder csvSchemaBuilder = CsvSchema.builder();
-            JsonNode firstObject = jsonTree.elements().next();
-            firstObject.fieldNames().forEachRemaining(fieldName -> {
-                csvSchemaBuilder.addColumn(fieldName);
-            });
-            CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
-            CsvMapper csvMapper = new CsvMapper();
-            try {
-                csvMapper.writerFor(JsonNode.class)
-                        .with(csvSchema)
-                        .writeValue(
-                                new File(
-                                        "C:\\Users\\PC\\Documents\\Java Projects\\demo\\TransportApp\\AnzahlInventaritems.csv"),
-                                jsonTree);
-            }
-            //add logger
-            catch (IOException e) {
-                logger.error("Failed to write CSV file.");
-            }
-        
-        } catch (IOException e) {
-            logger.error("Failed to read JSON file.");
-        }
-        } */
     }
 
     // add employee to the company and give them a unique security id the id goes from 1-5 and is used to check if they have access to that area

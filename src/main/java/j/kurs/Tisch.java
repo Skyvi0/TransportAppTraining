@@ -25,4 +25,28 @@ public class Tisch implements Transportierbar {
         return 0;
     }
 
+    @Override
+    public void wrap(Transportierbar item) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Transportierbar[] getItems() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public BubbleWrap wrap() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public SecureBox secureBox() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
