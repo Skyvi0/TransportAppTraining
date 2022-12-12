@@ -1,5 +1,8 @@
 package j.kurs;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +44,19 @@ public class App {
         }
         logger.info("Oracle JDBC Driver registered");
         
+        // create a new session and save the inventory to the database
+        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            // braking point of the application right now
+            session.persist(inventory);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.error("Data not saved", e);
+        }
+      
+       
+   
 
         // check if the inventory is zerbrechlich if so wrap it in some bubble wrap
         if (inventory.zerbrechlich()) {
