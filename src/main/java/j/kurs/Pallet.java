@@ -5,7 +5,7 @@ public class Pallet {
     // packs boxes into a pallet if the amount reaches 10
     public void pack(Inventory inventory) {
         int amount = 0;
-        for (Transportierbar item : inventory.getItems()) {
+        for (Transportierbar item : ((Transportierbar) inventory).getItems()) {
             if (item instanceof Box) {
                 amount++;
             }

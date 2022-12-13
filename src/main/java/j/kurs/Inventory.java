@@ -1,71 +1,56 @@
 package j.kurs;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "LAGER")
 public class Inventory {
-    // array of Transportierbar objects (Tisch, Stuhl, etc.)
-    private final Transportierbar[] inventar;
-    // number of items in the inventory
-    private int count;
-    // maximum number of items in the inventory 
-    private final int max;
-    // constructor with max number of items in the inventory as parameter 
-    public Inventory(int max) {
-        this.max = max;
-        inventar= new Transportierbar[max];
-        count = 0;
+    @Id
+    private Long id;
+    private Boolean zerbrechlich;
+    private Float gewicht;
+    private String create_time;
+    private String name;
+    // consturctor, getters and setters
+    public Inventory() {
     }
-    // add an item to the inventory 
-    public void add(Transportierbar item) {
-        if (count < max) {
-            inventar[count] = item;
-            count++;
-        }
+    public Inventory(Long id, Boolean zerbrechlich, Float gewicht, String create_time, String name) {
+        this.id = id;
+        this.zerbrechlich = zerbrechlich;
+        this.gewicht = gewicht;
+        this.create_time = create_time;
+        this.name = name;
     }
-    // remove an item from the inventory 
-    public void remove(Transportierbar item) {
-        for (int i = 0; i < count; i++) {
-            if (inventar[i] == item) {
-                inventar[i] = inventar[count - 1];
-                inventar[count - 1] = null;
-                count--;
-                break;
-            }
-        }
+    public Long getId() {
+        return id;
     }
-    // get the total weight of the inventory 
-    public float totalWeight() {
-        float total = 0;
-        for (int i = 0; i < count; i++) {
-            total += inventar[i].gewicht();
-        }
-        return total;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public Transportierbar[] getItems() {
-        return inventar;
+    public Boolean getZerbrechlich() {
+        return zerbrechlich;
     }
-
-    //count the adequate items 
-
-    public int countAdequateItems() {
-        int countAdequateItems = 0;
-        for (int i = 0; i < count; i++) {
-            if (!inventar[i].zerbrechlich()) {
-                countAdequateItems++;
-            }
-        }
-        return countAdequateItems;
+    public void setZerbrechlich(Boolean zerbrechlich) {
+        this.zerbrechlich = zerbrechlich;
     }
-
-    // check if the inventory is zerbrechlich if so wrap it in some bubble wrap and put it in a secure box
-    public boolean zerbrechlich() {
-        for (int i = 0; i < count; i++) {
-            if (inventar[i].zerbrechlich()) {
-                return true;
-                
-            }
-        }
-        return false;
+    public Float getGewicht() {
+        return gewicht;
     }
-    public void add(BubbleWrap bubbleWrap) {
+    public void setGewicht(Float gewicht) {
+        this.gewicht = gewicht;
+    }
+    public String getCreate_time() {
+        return create_time;
+    }
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }
+    
