@@ -13,8 +13,7 @@ public class Inventory {
     private String create_time;
     private String name;
     // consturctor, getters and setters
-    public Inventory() {
-    }
+ 
     public Inventory(Long id, Boolean zerbrechlich, Float gewicht, String create_time, String name) {
         this.id = id;
         this.zerbrechlich = zerbrechlich;
