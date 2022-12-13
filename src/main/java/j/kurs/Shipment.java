@@ -7,7 +7,7 @@ public class Shipment {
         Pallet pallet = new Pallet();
         Box box = new Box();
         int amount = 0;
-        for (Transportierbar item : inventory.getItems()) {
+        for (Transportierbar item : ((Transportierbar) inventory).getItems()) {
             if (item instanceof Box) {
                 amount++;
                 if (amount == 10) {

@@ -68,7 +68,7 @@ public class Warehouse {
 
     public void removeInventory(Inventory inventory) {
         if (inventory != null ) {
-            for (Transportierbar item : inventory.getItems()) {
+            for (Transportierbar item : ((Transportierbar) inventory).getItems()) {
                 removeTransportierbar(item);
             }
         }
