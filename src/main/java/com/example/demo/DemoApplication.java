@@ -9,14 +9,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
+
+//@EntityScan( basePackages = {"com.example.demo"})
+// fixed Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		Logger logger = LoggerFactory.getLogger(DemoApplication.class);
-        // create a new inventory with a maximum of 10 items
-       
+		Logger logger = LoggerFactory.getLogger(DemoApplication.class);  
         // impliment a connection to the oracle database
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -26,7 +27,7 @@ public class DemoApplication {
         logger.info("Oracle JDBC Driver registered");
         
         
-		// read the database using hibernate store the values in an array list
+		// read the database using hibernate store the values
 		
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         try (Session session = sessionFactory.openSession()) {
