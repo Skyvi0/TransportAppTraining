@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.bezkoder.spring.oracle.model.Inventory;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-  List<Inventory> findByTitleContaining(String title);
+  List<Inventory> findByNameContaining(String name);
 }
