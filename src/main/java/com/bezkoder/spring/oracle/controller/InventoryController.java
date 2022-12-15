@@ -37,7 +37,7 @@ public class InventoryController {
 			if (name == null)
 				inventoryRepository.findAll().forEach(inventory::add);
 			else
-				inventoryRepository.findByTitleContaining(name).forEach(inventory::add);
+				inventoryRepository.findByNameContaining(name).forEach(inventory::add);
 
 			if (inventory.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);

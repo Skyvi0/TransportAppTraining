@@ -1,4 +1,4 @@
-C:\Users\PC\Documents\Java Projects\spring-boot-hibernate-oracle-master\src\main\java\com\bezkoder\spring\oracle\repository\TutorialRepository.java
-C:\Users\PC\Documents\Java Projects\spring-boot-hibernate-oracle-master\src\main\java\com\bezkoder\spring\oracle\controller\TutorialController.java
-C:\Users\PC\Documents\Java Projects\spring-boot-hibernate-oracle-master\src\main\java\com\bezkoder\spring\oracle\SpringBootOracleApplication.java
-C:\Users\PC\Documents\Java Projects\spring-boot-hibernate-oracle-master\src\main\java\com\bezkoder\spring\oracle\model\Tutorial.java
+C:\Users\PC\Documents\Java Projects\demo\TransportApp\src\main\java\com\bezkoder\spring\oracle\repository\InventoryRepository.java
+C:\Users\PC\Documents\Java Projects\demo\TransportApp\src\main\java\com\bezkoder\spring\oracle\model\Inventory.java
+C:\Users\PC\Documents\Java Projects\demo\TransportApp\src\main\java\com\bezkoder\spring\oracle\SpringBootOracleApplication.java
+C:\Users\PC\Documents\Java Projects\demo\TransportApp\src\main\java\com\bezkoder\spring\oracle\controller\InventoryController.java

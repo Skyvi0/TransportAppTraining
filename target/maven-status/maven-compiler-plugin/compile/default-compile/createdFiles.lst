@@ -1,0 +1,4 @@
+com\bezkoder\spring\oracle\SpringBootOracleApplication.class
+com\bezkoder\spring\oracle\repository\InventoryRepository.class
+com\bezkoder\spring\oracle\controller\InventoryController.class
+com\bezkoder\spring\oracle\model\Inventory.class
